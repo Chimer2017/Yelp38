@@ -1,7 +1,7 @@
 import scrapy
 
 
-class QuotesSpider(scrapy.Spider):
+class e38Spider(scrapy.Spider):
     name = "e38" #identifies the spider, has to be unique
 
     def start_requests(self):
@@ -33,6 +33,8 @@ class QuotesSpider(scrapy.Spider):
                 'name': names[i].get(),
                 'address': adds[i].get(),
                 'website': webs[i].get(),
+                'rating':"default",
+                'review_count':"default",
             }
 
 
@@ -67,3 +69,7 @@ class QuotesSpider(scrapy.Spider):
         # with open(filename, 'wb') as f:
         #     f.write(response.body)
         # self.log('Saved file %s' % filename)
+
+
+
+

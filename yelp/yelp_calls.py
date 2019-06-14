@@ -13,6 +13,10 @@ addressRes = ""
 stateRes = 'CO'
 cityRes = 'Denver'
 
+output_json = []
+
+
+
 
 with open('data.json') as json_file:
     data = json.load(json_file)
@@ -24,6 +28,26 @@ with open('data.json') as json_file:
                                          city=cityRes,
                                          state=stateRes,
                                          country='US')
-        p['rating'] = response.rating
-        p['review_count'] = response.review_count
+        biz_info = response['businesses']
+        idRes=""
+        if len(biz_info) > 0:
+            idRes = biz_info[0]['id']
+            response = yelp_api.business_query(id=idRes)
+            output_json.append({
+                'name': nameRes,
+                'address': addressRes,
+                'website': p['website'],
+                'rating': response['rating'],
+                'review_count': response['review_count'],
+            })
+
+with open('final.json','w') as outfile:
+    json.dump(output_json,outfile)
+
+
+
+
+
+
+
     
